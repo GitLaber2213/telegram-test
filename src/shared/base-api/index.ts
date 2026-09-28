@@ -65,7 +65,7 @@ const baseQuery: BaseQueryFn<Args, unknown, ApiError> = async (args, api) => {
   try {
     const response = await fetch(url, {
       method: args.httpMethod ?? 'GET',
-      signal: api.signal,
+      signal: args.httpMethod === 'GET' ? api.signal : undefined,
       headers: args.body ? { 'Content-Type': 'application/json' } : undefined,
       body: args.body ? JSON.stringify(args.body) : undefined,
     })
